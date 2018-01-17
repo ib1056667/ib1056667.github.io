@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="CryptoGuess is a guessing game based on Ethereum Blockchain. Users can try to guess the question betting some weis. Winners will divide the accumulated amount">
+    <meta name="author" content="Arthur Mastropietro">
+    <title>CryptoGuess | Guess and Win</title>
+    <link rel="icon"
+          type="image/png"
+          href="images/favicon.png">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../fonts.googleapis.com/cssb7b3.css?family=Fruktur|Roboto" rel="stylesheet">
+    <link href="css/grayscale.min.css" rel="stylesheet">
+</head>
+<body id="page-top">
+<nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top"><img src="images/logo-xs.png"></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+            Menu
+            <i class="fa fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#game">The game</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="#how-to-play">How to play</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<header class="masthead">
+    <div class="alert alert-warning text-center">Game in Beta. Running on Ropsten - testnet</div>
+
+
+    <div class="intro-body">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="col-lg-12 pull-left text-center mtop40">
+                        <h1 class="brand-heading" id="question"></h1>
+
+                    </div>
+                    <div class="btn-group text-center" role="group" aria-label="..." id="tipsBtnGroup">
+                        <button type="button" class="btn btn-sm btn-default" id="tip1">Tip 1</button>
+                        <button type="button" class="btn btn-sm btn-default" id="tip2">Tip 2</button>
+                        <button type="button" class="btn btn-sm btn-default" id="tip3">Tip 3</button>
+                    </div>
+                    <div class="col-lg-12 mtop40" id="answerBtn" style="display: none">
+                        <button class="btn btn-success btn-lg button pulse" onclick="App.showAnswer();return false">
+                            Check Answer!
+                        </button>
+                    </div>
+                    <div class="col-lg-4 text-left mtop40">Estimated prize: <span id="prize"></span></div>
+                    <div class="col-lg-4 text-left"><span id="timeLeft">Time left:</span>
+                        <span id="cron"></span></div>
+                    <div class="col-lg-4 text-left">Guess Price Level <span
+                            id="guessPriceLevel"></span>: <span
+                            id="guessPrice"></span> ETH
+                    </div>
+                </div>
+                <div class="col-lg-12 mtop40">
+                    <input type="text" class="form-control form-group-lg" placeholder="Your Answer"
+                           id="answer-input">
+                </div>
+                <div class="col-lg-12 pull-left text-center mtop40">
+                    <button type="button" class="btn btn-default button pulse" id="guessBtn"
+                            onclick="App.userGuess(); return false;">
+                        Guess!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<section id="game" class="content-section text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2><strong>How is the game?</strong></h2>
+                <p>Everyday a new question will be asked, for example: "What is the name of the band?"</p>
+                <p>Try to guess the answer! during the day, we will give tips to help you out. But watchout! after a tip
+                    goes out, the guess's price doubles, so trying to guess before tips is more cheaper.</p>
+                <h4><strong>How much will i pay?</strong></h4>
+                <p>The guess price varies during the day:<br/>
+                    Before any tip: <strong>0.05 ETH</strong>;<br/>
+                    After first tip: <strong>0.1 ETH</strong>;<br/>
+                    After second tip: <strong>0.2 ETH</strong>;<br/>
+                    After third tip: <strong>0.4 ETH</strong>.<br/>
+                </p>
+                <p>And, of course, you will pay some gas to send your guess, which go to the miners, so they can process
+                    the transaction in the blockchain.</p>
+                <h4><strong>How can i win?</strong></h4>
+                <p>In the end of countdown, the game will be paused and the right answer will be revealed. Everyone who
+                    guessed the right answer will receive part of the total amount of this game. For example: If 10
+                    people hit the answer, the total amount (minus 10%) will be divided by these 10 people.</p>
+                <h4><strong>I won! How can i get my prize?</strong></h4>
+                <p>Every winner will receive their part in their wallet (the same used to guess).</p>
+                <h4><strong>Blockchain Security and transparency!</strong></h4>
+                <p>All transactions and calculations are made automatically in the blockchain providing security and
+                    transparency.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="how-to-play" class="download-section content-section text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2><strong>How to play?</strong></h2>
+                <p>We recommend you installing Metamask. Metamask is a secure digital wallet directly in your browser.
+                    Or you can use any Ethereum digital wallet you may prefer</p>
+                <p><a href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en"
+                      target="_blank" class="btn btn-default">Install Metamask</a></p>
+                <p>After that you will need to get some <a href="https://www.ethereum.org/ether" target="_blank">ethers(ETH)</a>
+                    in your digital wallet. Ether is the cryptocurrency that powers the Ethereum blockchain.</p>
+                <h4><strong>With Metamask:</strong></h4>
+                <p>All you need to do is input your guess in home page and click Guess! button. Metamask will ask you to
+                    confirm the transaction. Click ok.</p>
+                <h4><strong>Without Metamask:</strong></h4>
+                <p>If you are running a Ethereum node like Geth, it means you have a node running on your computer.
+                    You can use the web application as well.</p>
+                <!--<p>Otherwise, you need to send a transaction:</p>-->
+                <!--<p>Contract address: <code>0xd8e823d62d062db13005337ae2531cd3108f280e</code><br/>-->
+                    <!--Function to call: <code>setUserGuess("YOUR GUESS", {from: YOUR_ADDRESS, value:-->
+                        <!--GAS_PRICE_IN_WEIS})</code></p>-->
+                <h4><strong>Rules:</strong></h4>
+                <p>Guess many times as you want;</p>
+                <p>Careful with spelling. Answers are NOT case sensitive, however typo will invalidate your answer. Do
+                    not use special characters as well;</p>
+                <p>The game does not works on mobile gadgets.</p>
+            </div>
+        </div>
+    </div>
+</section>
+<div id="foo"></div>
+<footer>
+    <div class="container">
+        <div class="col-xs-4 pull-left"><p><a href="mailto:contact@cryptoguess.me?Subject=Contact"> Contact</a></p></div>
+        <div class="col-xs-4 pull-right"><p>Copyright &copy; CryptoGuess 2017</p></div>
+    </div>
+</footer>
+
+<script src="js/bundle.js"></script>
+</body>
+</html>
